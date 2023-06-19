@@ -1,12 +1,12 @@
 import random
 from game.utils.constants import SCREEN_WIDTH, SCREEN_HEIGHT, LEFT, RIGHT
 
-class Enemy:
+class Son:
     
-    X_POS_LIST = [50, 150, 250, 450, 550, 650, 750, 850, 950]
+    X_POS_LIST = [150, 450, 550, 650, 850]
     Y_POS = 0
-    SPEED_X = 6
-    SPEED_Y = 3
+    SPEED_X = 2
+    SPEED_Y = 2
     MOV_X = [LEFT, RIGHT]
     INTERVAL = 100
 
@@ -41,7 +41,3 @@ class Enemy:
             if self.index > self.INTERVAL or self.rect.right >= SCREEN_WIDTH:
                 self.MOV_X = LEFT
                 self.index += 1
-
-
-
-
