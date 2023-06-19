@@ -1,21 +1,17 @@
 import random
-from game.utils.constants import SCREEN_WIDTH, SCREEN_HEIGHT, LEFT, RIGHT
+from game.utils.constants import SCREEN_HEIGHT
 
 class Son:
-    
-    X_POS_LIST = [150, 450, 550, 650, 850]
-    Y_POS = 0
-    SPEED_X = 2
-    SPEED_Y = 2
-    MOV_X = [LEFT, RIGHT]
+    X_POS_LIST = [100, 400, 600, 800]
+    SPEED_Y = 10
+    SPEED_X = 0
     INTERVAL = 100
-
 
     def __init__(self, image):
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.x = random.choice(self.X_POS_LIST)
-        self.rect.y = self.Y_POS
+        self.rect.y = 0
         self.is_alive = True
         self.index = 0
 
@@ -30,14 +26,4 @@ class Son:
     
     def move(self):
         self.rect.y += self.SPEED_Y
-        if self.MOV_X == LEFT:
-            self.rect.x -= self.SPEED_X
-            if self.index > self.INTERVAL or self.rect.left <= 0:
-                self.MOV_X = RIGHT
-                self.index = 0
-        
-        else:
-            self.rect.x += self.SPEED_X 
-            if self.index > self.INTERVAL or self.rect.right >= SCREEN_WIDTH:
-                self.MOV_X = LEFT
-                self.index += 1
+        self.rect.x = self.SPEED_X

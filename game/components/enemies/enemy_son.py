@@ -16,7 +16,7 @@ class EnemySon:
             enemy.draw(screen)
 
     def add_enemy(self):
-        if len(self.enemies) <2:
+        if len(self.enemies) <4:
            self.enemies.append(Ship2())  
 
     def remove_enemy(self, enemy):
