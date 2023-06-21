@@ -3,7 +3,7 @@ import pygame
 from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE
 from game.components.spaceship import Spaceship
 from game.components.enemies.enemy_handler import EnemyHandler
-from game.components.enemies.enemy_son import EnemySon
+from game.components.bullets.bullet_handler import BulletHandler
 
 
 
@@ -20,13 +20,13 @@ class Game:
         self.y_pos_bg = 0
         self.player = Spaceship()
         self.enemy_handler = EnemyHandler()
-        self.enemy_son = EnemySon()
+        self.bullet_handler = BulletHandler()
 
 
     def run(self):
         # Game loop: events - update - draw
         self.playing = True
-        while self.playing:
+        while self.player.is_alive:
             self.events()
             self.update()
             self.draw()
@@ -40,9 +40,12 @@ class Game:
 
     def update(self):
         user_input = pygame.key.get_pressed()
-        self.player.update(user_input)
-        self.enemy_handler.update()
-        self.enemy_son.update()
+        self.player.update(user_input, self.player, self.bullet_handler)
+        self.enemy_handler.update(self.player, self.bullet_handler)
+        self.bullet_handler.update(self.player, self.enemy_handler.enemies)
+        if not self.player.is_alive:
+            pygame.time.delay(300)
+            self.playing = False
 
     def draw(self):
         self.clock.tick(FPS)
@@ -50,9 +53,10 @@ class Game:
         self.draw_background()
         self.enemy_handler.draw(self.screen)
         self.player.draw(self.screen)
-        self.enemy_son.draw(self.screen)
+        self.bullet_handler.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
+        
 
     def draw_background(self):
         image = pygame.transform.scale(BG, (SCREEN_WIDTH, SCREEN_HEIGHT))
