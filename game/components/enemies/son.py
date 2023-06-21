@@ -4,7 +4,7 @@ from game.utils.constants import SCREEN_HEIGHT, SCREEN_WIDTH
 class Son:
     X_POS_LIST = [100, 800]
     SPEED_X = 10
-    SPEED_Y = 0
+    SPEED_Y = 10
     INTERVAL = 20
 
     def __init__(self, image):

@@ -5,9 +5,10 @@ from game.utils.constants import ENEMY_1, RIGHT, LEFT, SCREEN_WIDTH
 class Ship(Enemy):
     WIDTH = 40
     HEIGHT = 60
-    SPEED_Y = 5
-    SPEED_X = 2
+    SPEED_Y = 15
+    SPEED_X = 12
     INTERVAL = 100
+    
     def __init__(self, Speed):
         self.image = ENEMY_1
         self.image = pygame.transform.scale(self.image, (self.WIDTH, self.HEIGHT))

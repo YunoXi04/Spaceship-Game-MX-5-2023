@@ -9,8 +9,7 @@ class Ship2(Enemy):
     SPEED_X = 20
 
     def __init__(self, Speed):
-        self.image = ENEMY_2
-        self.image = pygame.transform.scale(self.image, (self.WIDTH, self.HEIGHT))
+        self.image = pygame.transform.scale(ENEMY_2, self.image, (self.WIDTH, self.HEIGHT))
         super().__init__(self.image, Speed)
 
     def move(self):
