@@ -27,6 +27,8 @@ BULLET = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_1.png"))
 BULLET_ENEMY = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_2.png"))
 ENEMY_1 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_1.png"))
 ENEMY_2 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_2.png"))
+ENEMY_3 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/son.png"))
+ENEMY_4 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/father.png"))
 
 FONT_STYLE = 'freesansbold.ttf'
 
@@ -36,6 +38,7 @@ BULLET_PLAYER_TYPE = "player"
 LEFT = "left"
 RIGHT = "right"
 
+HEARTS = pygame.image.load(os.path.join(IMG_DIR, "Heart/heart.png"))
 
 BLACK_COLOR = (0, 0, 0)
 WHITE_COLOR = (255,255,255)

@@ -1,5 +1,7 @@
 from game.components.enemies.ship import Ship
 from game.components.enemies.ship2 import Ship2
+from game.components.enemies.son import Son
+from game.components.enemies.father import Father
 
 class EnemyHandler:
     def __init__(self):
@@ -28,11 +30,15 @@ class EnemyHandler:
             
         if self.cont % 100 == 0:
             self.enemies.append(Ship(self.Speed))
-            for enemy in self.enemies:
-                enemy.Speed = self.Speed
-        self.cont += 1
+
+        if self.cont % 400 == 0:
+            self.enemies.append(Son(self.Speed)) 
+
+        if self.cont % 600 == 0:
+            self.enemies.append(Father(self.Speed))      
         for enemy in self.enemies:
                 enemy.Speed = self.Speed
+        self.cont += 1        
 
     def remove_enemy(self, enemy):
         self.enemies.remove(enemy)   
@@ -44,6 +50,9 @@ class EnemyHandler:
 
     def reset(self):  
         self.enemies = [] 
-        self.number_enemies_destroyed = 0     
+        self.number_enemies_destroyed = 0 
+        self.Speed = 0
+        self.cont = 1
+            
 
 

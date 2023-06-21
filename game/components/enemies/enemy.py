@@ -35,21 +35,14 @@ class Enemy:
         screen.blit(self.image, self.rect)
     
     def move(self):
-        self.rect.y += self.SPEED_Y
-        if self.MOV_X == LEFT:
-            self.rect.x -= self.SPEED_X
-            if self.index > self.INTERVAL or self.rect.left <= 0:
-                self.MOV_X = RIGHT
-                self.index = 0
-        
-        else:
-            self.rect.x += self.SPEED_X 
-            if self.index > self.INTERVAL or self.rect.right >= SCREEN_WIDTH:
-                self.MOV_X = LEFT
-        self.index += 1
+        pass
 
     def shoot(self, bullet_handler):
         if self.shooting_time % self.SHOOTING_TIME == 0:
             bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
+
+    def get_damage(self, damage):
+        self.is_alive = False
+        self.is_destroyed = True              
 
 

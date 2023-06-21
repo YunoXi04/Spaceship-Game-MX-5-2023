@@ -1,10 +1,11 @@
-import pygame
+import pygame 
 
 from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, WHITE_COLOR
 from game.components.spaceship import Spaceship
 from game.components.enemies.enemy_handler import EnemyHandler
-from game.utils import text_utils
 from game.components.bullets.bullet_handler import BulletHandler
+from game.utils import text_utils
+from game.utils import life_utils
 
 
 
@@ -33,7 +34,8 @@ class Game:
             self.events()
             self.update()
             self.draw()
-        pygame.display.quit(300)
+        pygame.time.delay(300)
+        pygame.display.quit()
         pygame.quit()
 
     def events(self):
@@ -51,11 +53,13 @@ class Game:
             self.player.update(user_input, self.bullet_handler)
             self.enemy_handler.update(self.player, self.bullet_handler)
             self.bullet_handler.update(self.player, self.enemy_handler.enemies)
-            self.score = self.enemy_handler.number_enemies_destroyed
+            self.score[self.number_deadth] = self.enemy_handler.number_enemies_destroyed * 10
             if not self.player.is_alive:
+                self.draw()
                 pygame.time.delay(300)
                 self.playing = False
                 self.number_deadth += 1
+                self.scores.append(0)
 
     def draw(self):
         self.draw_background()
@@ -66,6 +70,7 @@ class Game:
             self.player.draw(self.screen)
             self.bullet_handler.draw(self.screen)
             self.draw_score()
+            life_utils.draw_ñife(self.player.life.screen)
         else:
             self.draw_menu()
         pygame.display.update()
@@ -87,10 +92,14 @@ class Game:
             text, text_rect = text_utils.get_message("Press any Key to Start", 30, WHITE_COLOR)
             self.screen.blit(text, text_rect) 
         else:
+            best, best_score = text_utils.get_message(f"Best Score: {max(self.score)}", 30, WHITE_COLOR, height=SCREEN_HEIGHT//2 - 50)
             text, text_rect = text_utils.get_message("Press any Key to Restart", 30, WHITE_COLOR)
             score, score_rect = text_utils.get_message(f"Your Score is: {self.score}", 30, WHITE_COLOR, height=SCREEN_HEIGHT // 2 + 50)
+            tries, tries_rect = text_utils.get_message(f"Deads: {self.number_deadth}", 20, WHITE_COLOR, height=SCREEN_HEIGHT // 2 + 50)
+            self.screen.blit(best, best_score)
             self.screen.blit(text, text_rect) 
             self.screen.blit(score, score_rect)
+            self.screen.blit(tries, tries_rect)
 
     def draw_score(self):
         score, score_rect = text_utils.get_message(f"Your Score is: {self.score}", 20, WHITE_COLOR, 1000, 40)

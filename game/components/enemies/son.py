@@ -1,29 +1,20 @@
 import random
-from game.utils.constants import SCREEN_HEIGHT, SCREEN_WIDTH
+from game.components.enemies.enemy import Enemy
+from game.utils.constants import ENEMY_3, SCREEN_HEIGHT
 
-class Son:
-    X_POS_LIST = [100, 800]
-    SPEED_X = 10
-    SPEED_Y = 10
-    INTERVAL = 20
+class Son(Enemy):
+   WIDTH = 50
+   HEIGHT = 60
 
-    def __init__(self, image):
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.rect.x = random.choice(self.X_POS_LIST)
-        self.rect.y = random.randint(0, SCREEN_HEIGHT)
-        self.is_alive = True
-        self.index = 0
+def __init__(self, Speed):
+        self.image = pygame.transform.scale(ENEMY_3, (self.WIDTH, self.HEIGHT))
+        self.speed_y = random.randrange(20, 25)
+        super(Enemy).__init__(self.image, Speed)
+      
+def move(self):
+        self.rect.y += self.speed_y+self.extra_speed
 
-    def update(self):
-        if self.rect.x >= SCREEN_WIDTH:
+def update(self, bullet_handler):
+        if self.rect.y >= SCREEN_HEIGHT:
             self.is_alive = False
-
         self.move()
-
-    def draw(self, screen):
-        screen.blit(self.image, self.rect)
-    
-    def move(self):
-        self.rect.x += self.SPEED_X
-        self.rect.y += self.SPEED_Y

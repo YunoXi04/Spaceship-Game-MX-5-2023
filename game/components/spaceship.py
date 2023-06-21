@@ -14,6 +14,7 @@ class Spaceship:
         self.rect.x = self.X_POS
         self.rect.y = self.Y_POS
         self.is_alive = True
+        self.life = 50
         
     def update(self, user_input, bullet_handler):
         if user_input[pygame.K_LEFT]:
@@ -46,6 +47,11 @@ class Spaceship:
         if self.rect.bottom < SCREEN_HEIGHT:
             self.rect.y += 10  
 
+    def get_damage(self, damage):
+        self.life -= damage
+        if self.life <= 0:
+            self.is_alive = False        
+
     def shoot(self, bullet_handler):
          bullet_handler.add_bullet(BULLET_PLAYER_TYPE, self.rect.center)        
    
@@ -53,6 +59,7 @@ class Spaceship:
         self.rect.x = self.X_POS
         self.rect.y = self.Y_POS
         self.is_alive = True
+        self.life = 50
              
 
 
