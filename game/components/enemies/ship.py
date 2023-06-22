@@ -1,6 +1,6 @@
 import pygame
 from game.components.enemies.enemy import Enemy
-from game.utils.constants import ENEMY_1, RIGHT, LEFT, SCREEN_WIDTH
+from game.utils.constants import ENEMY_1, RIGHT, LEFT, SCREEN_WIDTH, BULLET_ENEMY_TYPE, SCREEN_HEIGHT
 
 class Ship(Enemy):
     WIDTH = 40
@@ -10,25 +10,32 @@ class Ship(Enemy):
     INTERVAL = 100
     
     def __init__(self, Speed):
-        self.image = ENEMY_1
-        self.image = pygame.transform.scale(self.image, (self.WIDTH, self.HEIGHT))
+        self.image = pygame.transform.scale(ENEMY_1, (self.WIDTH, self.HEIGHT))
         self.cont = 0
         super().__init__(self.image, Speed)
 
     def move(self):   
-        self.rect.y += self.SPEED_Y+self.Speed
+        self.rect.y += self.SPEED_Y + self.Speed
         if self.mov_x == LEFT:
-           self.rect.x -= self.SPEED_X+self.Speed
+           self.rect.x -= self.SPEED_X + self.Speed
         if self.cont > self.INTERVAL or self.rect.left <= 0:
-                self.mov_x = RIGHT
-                self.cont = 0 
+            self.mov_x = RIGHT
+            self.cont = 0 
         else:
-             self.rect.x += self.SPEED_X+self.Speed
+            self.rect.x += self.SPEED_X + self.Speed
         if self.cont > self.INTERVAL or self.rect.right >= SCREEN_WIDTH:
-              self.mov_x = LEFT
-              self.cont = 0
-              self.cont += 1
+            self.mov_x = LEFT
+            self.cont = 0
+        self.cont += 1
 
+    def shoot(self, bullet_handler):
+        bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
+    
+    def update(self, bullet_handler):
+        if self.rect.y >= SCREEN_HEIGHT:
+            self.is_alive = False
+        self.move()
+        self.shoot(bullet_handler)
 
                      
 

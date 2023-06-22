@@ -4,10 +4,8 @@ from game.utils.constants import BULLET_ENEMY, BULLET_ENEMY_TYPE, SCREEN_HEIGHT
 
 class BulletEnemy(Bullet):
     WIDTH = 9
-    HEIGTH = 32
+    SCREEN_HEIGHT = 32
     SPEED = 10
-
-
 
     def __init__(self, center):
         self.image = BULLET_ENEMY
@@ -17,7 +15,11 @@ class BulletEnemy(Bullet):
 
     def draw(self, screen):
         for bullet in self.bullets:
-            bullet.draw(screen)    
+            bullet.draw(screen)   
+
+#verificar con cual draw funciona#
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)         
 
     def update(self, player):
         self.rect.y += self.SPEED

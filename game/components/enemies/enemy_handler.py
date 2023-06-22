@@ -6,7 +6,7 @@ from game.components.enemies.father import Father
 class EnemyHandler:
     def __init__(self):
         self.enemies = []
-        self.Speed = 10
+        self.speed = 10
         self.cont = 1
         self.number_enemies_destroyed = 0
 
@@ -25,19 +25,19 @@ class EnemyHandler:
             enemy.draw(screen)
 
     def add_enemy(self):
-        if self.cont % 100 == 0:
-            self.enemies.append(Ship2(self.Speed))
+        if self.cont % 150 == 0:
+            self.enemies.append(Ship2(self.speed))
             
         if self.cont % 100 == 0:
-            self.enemies.append(Ship(self.Speed))
+            self.enemies.append(Ship(self.speed))
 
         if self.cont % 400 == 0:
-            self.enemies.append(Son(self.Speed)) 
+            self.enemies.append(Son(self.speed)) 
 
         if self.cont % 600 == 0:
-            self.enemies.append(Father(self.Speed))      
+            self.enemies.append(Father(self.speed))      
         for enemy in self.enemies:
-                enemy.Speed = self.Speed
+                enemy.speed = self.speed
         self.cont += 1        
 
     def remove_enemy(self, enemy):
@@ -46,12 +46,12 @@ class EnemyHandler:
     def check_colisions(self, enemy, player):
         if enemy.rect.colliderect(player.rect):
             enemy.is_alive = False
-            player.get_damage(10)
+            player.receive_damage(10)
 
     def reset(self):  
         self.enemies = [] 
         self.number_enemies_destroyed = 0 
-        self.Speed = 0
+        self.speed = 0
         self.cont = 1
             
 

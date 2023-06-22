@@ -8,15 +8,15 @@ class BulletHandler:
         
     def update(self,player, enemies):
         for bullet in self.bullets:
-            if type (bullet) is BulletEnemy:
-               bullet.update(player)
+            if isinstance(bullet,BulletEnemy):
+                bullet.update(player)
             if not bullet.is_alive:
                 self.remove_bullet(bullet)
             else:
                 if bullet.type == BULLET_ENEMY_TYPE:
                     bullet.update(player)
             for enemy in enemies:
-                        bullet.update(enemy)        
+                bullet.update(enemy)        
    
 
     def draw(self, screen):

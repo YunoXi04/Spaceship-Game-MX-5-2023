@@ -50,10 +50,13 @@ class Spaceship:
     def get_damage(self, damage):
         self.life -= damage
         if self.life <= 0:
-            self.is_alive = False        
+            self.is_alive = False  
+
+    def receive_damage(self, amount):
+        self.life -= amount              
 
     def shoot(self, bullet_handler):
-         bullet_handler.add_bullet(BULLET_PLAYER_TYPE, self.rect.center)        
+         bullet_handler.add_bullet(BULLET_PLAYER_TYPE, self.rect.center, self)        
    
     def reset(self):  
         self.rect.x = self.X_POS
