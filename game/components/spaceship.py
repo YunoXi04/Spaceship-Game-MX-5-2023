@@ -39,6 +39,9 @@ class Spaceship:
     def draw(self, screen):
         screen.blit(self.image, self.rect)
 
+    def shoot(self, bullet_handler):
+        bullet_handler.add_bullet(BULLET_PLAYER_TYPE, self.rect.center)      
+
     def move_left(self):
         if self.rect.left > 0:
             self.rect.x -= 10
@@ -61,10 +64,7 @@ class Spaceship:
             self.is_alive = False  
 
     def receive_damage(self, amount):
-        self.life -= amount              
-
-    def shoot(self, bullet_handler):
-         bullet_handler.add_bullet(BULLET_PLAYER_TYPE, self.rect.center, self)        
+        self.life -= amount                    
    
     def activate_power_up(self, power_up):
         self.time_up = power_up.time_up

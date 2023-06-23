@@ -25,11 +25,12 @@ class Enemy:
         self.Speed = Speed
 
     def update(self, bullet_handler):
+        self.move()
         if self.rect.y >= SCREEN_HEIGHT:
-            self.is_alive = False
-            self.shoot(bullet_handler)
-            self.shooting_time += 1
-            self.move()
+                self.is_alive = False
+        self.shooting_time += 1
+        self.shoot(bullet_handler)
+            
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)

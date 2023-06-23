@@ -6,28 +6,25 @@ class BulletHandler:
     def __init__(self):
         self.bullets = []
         
-    def update(self,player, enemies):
+    def update(self, player, enemies):
         for bullet in self.bullets:
-            if isinstance(bullet,BulletEnemy):
+            if isinstance(bullet, BulletEnemy):
                 bullet.update(player)
-            if not bullet.is_alive:
-                self.remove_bullet(bullet)
-            else:
-                if bullet.type == BULLET_ENEMY_TYPE:
-                    bullet.update(player)
-            for enemy in enemies:
-                bullet.update(enemy)        
+            elif isinstance(bullet, BulletPlayer):
+                bullet.update(enemies)
+                if not bullet.is_alive:
+                    self.remove_bullet(bullet)       
    
 
     def draw(self, screen):
         for bullet in self.bullets:
             bullet.draw(screen)
 
-    def add_bullet(self, type, center):
-        if type == BULLET_ENEMY_TYPE:
+    def add_bullet(self, bullet_type, center, shooter=None):
+        if bullet_type == BULLET_ENEMY_TYPE:
             self.bullets.append(BulletEnemy(center))
-        elif type == BULLET_PLAYER_TYPE:
-            self.bullets.append(BulletPlayer(center))    
+        elif bullet_type == BULLET_PLAYER_TYPE:
+            self.bullets.append(BulletPlayer(center, shooter))    
 
     def remove_bullet(self, bullet):
         self.bullets.remove(bullet)

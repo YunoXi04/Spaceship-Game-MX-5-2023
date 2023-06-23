@@ -1,13 +1,13 @@
 from game.utils.constants import SCREEN_HEIGHT
 
 class Bullet:
-    def __init__(self, image,center):
+    def __init__(self, image,ship):
         self.image = image
         self.rect = self.image.get_rect()
-        self.rect.center = center
+        self.rect.center = ship.rect.center
         self.is_alive = True
 
-    def update(self, object, other):
+    def update(self, object):
         if self.rect.y >= SCREEN_HEIGHT:
             self.is_alive = False
         if self.rect.colliderect(object.rect):

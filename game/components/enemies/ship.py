@@ -35,7 +35,6 @@ class Ship(Enemy):
         self.move(player_pos)
         if self.rect.y >= SCREEN_HEIGHT:
             self.is_alive = False
-        self.move()
         self.shoot(bullet_handler)
         super().update()
 

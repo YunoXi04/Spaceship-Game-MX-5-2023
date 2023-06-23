@@ -1,12 +1,13 @@
 import pygame 
-from game.utils import text_utils
-from game.utils import life_utils
 
 from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, WHITE_COLOR
 from game.components.spaceship import Spaceship
 from game.components.enemies.enemy_handler import EnemyHandler
 from game.components.bullets.bullet_handler import BulletHandler
 from game.components.power_ups.power_up_handler import PowerUpHandler
+from game.components.power_ups.new_life import  NewLife
+from game.utils import text_utils
+from game.utils import life_utils
 
 
 class Game:
@@ -25,8 +26,10 @@ class Game:
         self.enemy_handler = EnemyHandler()
         self.bullet_handler = BulletHandler()
         self.power_up_handler = PowerUpHandler()
+        self.new_life = NewLife()
         self.number_death = 0
-        self.score = 0
+        self.score = [0]
+        self.life = 50
 
     def run(self):
         # Game loop: events - update - draw
@@ -55,25 +58,28 @@ class Game:
             self.enemy_handler.update(self.player, self.bullet_handler)
             self.bullet_handler.update(self.player, self.enemy_handler.enemies)
             self.power_up_handler.update(self.player)
+            self.new_life.update(self.player)
             self.score[self.number_death] = self.enemy_handler.number_enemies_destroyed * 10
             if not self.player.is_alive:
                 self.draw()
                 pygame.time.delay(300)
                 self.playing = False
                 self.number_death += 1
-                self.scores.append(0)
+                
 
     def draw(self):
         self.draw_background()
         if  self.playing:
             self.clock.tick(FPS)
+            self.draw_background()
             self.screen.fill((255, 255, 255))
             self.enemy_handler.draw(self.screen)
             self.player.draw(self.screen)
             self.bullet_handler.draw(self.screen)
             self.power_up_handler.draw(self.screen)
+            self.new_life.draw(self.screen)
             self.draw_score()
-            life_utils.draw_life(self.player.life.screen)
+            life_utils.draw_life(self.life, self.screen)
         else:
             self.draw_menu()
         pygame.display.update()
@@ -112,8 +118,7 @@ class Game:
         self.player.reset()
         self.enemy_handler.reset()
         self.bullet_handler.reset()
-        self.number_death.reset() 
-        self.score.reset()
         self.power_up_handler.reset()
+        self.new_life.reset()
 
         
