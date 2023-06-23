@@ -17,8 +17,7 @@ class PowerUpHandler:
             power_up.update(player)
             if power_up.is_used:
                 player.activate_power_up(power_up) 
-            if not power_up.is_alive:
-                self.remove_power_up(power_up)
+
 
     def draw(self, screen):
         for  power_up in self.power_ups:
@@ -28,8 +27,6 @@ class PowerUpHandler:
     def add_power_up(self):
         self.power_ups.append(Shield())
 
-    def remove_power_up(self, power_up):
-        self.power_ups.remove(power_up)
 
     def reset(self):
         self.power_ups = []
