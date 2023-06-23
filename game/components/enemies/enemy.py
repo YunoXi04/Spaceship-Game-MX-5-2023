@@ -4,10 +4,11 @@ from game.utils.constants import SCREEN_WIDTH, SCREEN_HEIGHT, LEFT, RIGHT, BULLE
 class Enemy:
     
     y_pos_inicial = -60
-    mov_x = [RIGHT, LEFT]
-    Speed = 10
+    MOV_X = [RIGHT, LEFT]
+    Speed = 20
     SPEED_Y = 10
     SPEED_X = 10
+    INTERVAL = 100
     SHOOTING_TIME = 30
 
 
@@ -16,8 +17,8 @@ class Enemy:
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0, SCREEN_WIDTH)
         self.rect.y = self.y_pos_inicial
+        self.mov_x = random.choice(self.MOV_X)
         self.is_alive = True
-        self.mov_x = random.choice(self.mov_x)
         self.index = 0
         self.shooting_time = 0
         self.is_destroyed = False
@@ -34,7 +35,7 @@ class Enemy:
         screen.blit(self.image, self.rect)
     
     def move(self):
-        pass
+        pass    
 
     def shoot(self, bullet_handler):
         if self.shooting_time % self.SHOOTING_TIME == 0:

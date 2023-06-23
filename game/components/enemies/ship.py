@@ -31,11 +31,13 @@ class Ship(Enemy):
     def shoot(self, bullet_handler):
         bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
     
-    def update(self, bullet_handler):
+    def update(self, bullet_handler, player_pos):
+        self.move(player_pos)
         if self.rect.y >= SCREEN_HEIGHT:
             self.is_alive = False
         self.move()
         self.shoot(bullet_handler)
+        super().update()
 
                      
 

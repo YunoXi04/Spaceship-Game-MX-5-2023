@@ -11,7 +11,7 @@ class Bullet:
         if self.rect.y >= SCREEN_HEIGHT:
             self.is_alive = False
         if self.rect.colliderect(object.rect):
-            other.get_damage(10)
+            object.is_alive = False
             self.is_alive = False
 
     def draw(self, screen):

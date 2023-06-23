@@ -16,7 +16,7 @@ class Ship2(Enemy):
     def move(self):
         self.rect.y += self.SPEED_Y
         if self.mov_x == LEFT:
-            self.rect.x -= self.SPEED_X+self.Speed
+            self.rect.x -= self.SPEED_X + self.Speed
             if self.rect.left <= 0:
                 self.mov_x = RIGHT
         else:
