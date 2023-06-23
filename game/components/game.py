@@ -121,4 +121,10 @@ class Game:
         self.power_up_handler.reset()
         self.new_life.reset()
 
+    def music(self):
+        pygame.mixer.music.load("sound/sounds_intro.mp3")
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.10)
+
+
         

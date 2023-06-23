@@ -30,6 +30,9 @@ ENEMY_1 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_1.png"))
 ENEMY_2 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_2.png"))
 ENEMY_3 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/son.png"))
 ENEMY_4 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/father.png"))
+#musica de fondo
+pygame.mixer.music.load("sound/sounds_intro.mp3")
+pygame.mixer.music.play(-1)
 
 FONT_STYLE = 'freesansbold.ttf'
 

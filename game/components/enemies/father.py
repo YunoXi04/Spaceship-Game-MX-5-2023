@@ -3,6 +3,7 @@ import random
 from game.components.enemies.enemy import Enemy
 from game.utils.constants import ENEMY_4, SCREEN_WIDTH, SCREEN_HEIGHT, BULLET_ENEMY_TYPE
 
+
 class Father(Enemy):
     WIDTH = 50
     HEIGHT = 50

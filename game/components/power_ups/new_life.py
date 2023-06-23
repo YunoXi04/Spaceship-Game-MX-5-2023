@@ -6,7 +6,8 @@ from game.components.power_ups.shield import Shield
 
 class NewLife(PowerUp):
 
-    INTERVAL_TIME = 700
+    INTERVAL_TIME = 7000
+    
 
     def __init__(self):
         self.image = HEARTS
