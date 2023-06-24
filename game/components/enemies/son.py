@@ -6,7 +6,7 @@ from game.utils.constants import ENEMY_3, SCREEN_HEIGHT, BULLET_ENEMY_TYPE
 class Son(Enemy):
    WIDTH = 50
    HEIGHT = 60
-   SHOOTING_INTERVAL = 150
+   SHOOTING_TIME = 1000
 
    def __init__(self, Speed):
         self.image = pygame.transform.scale(ENEMY_3, (self.WIDTH, self.HEIGHT))
@@ -19,7 +19,7 @@ class Son(Enemy):
             self.is_alive = False
         self.move()
         self.shooting_timer += 1
-        if self.shooting_timer >= self.SHOOTING_INTERVAL:
+        if self.shooting_timer >= self.SHOOTING_TIME:
             self.shoot(bullet_handler)
             self.shooting_timer = 0
 
@@ -27,5 +27,6 @@ class Son(Enemy):
         self.rect.y += self.speed_y + self.Speed
 
    def shoot(self, bullet_handler):
-        bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)  
+        if self.shooting_time % self.SHOOTING_TIME == 0:
+          bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.centerS)  
           

@@ -29,7 +29,8 @@ class BulletHandler:
             self.bullets.append(BulletPlayer(center))    
 
     def remove_bullet(self, bullet):
-        self.bullets.remove(bullet)
+        if not bullet.is_alive:
+            self.bullets.remove(bullet)
 
     def reset(self):
         self.bullets = []    

@@ -5,7 +5,7 @@ class PowerUp:
     WIDTH = 30
     HEIGHT = 30
     POS_Y = 0
-    SPPED = 5
+    SPEED = 5
     DURATION = 5000
 
 
@@ -21,7 +21,7 @@ class PowerUp:
 
 
     def update(self, player):
-        self.rect_y += self.SPPED
+        self.rect_y += self.SPEED
         if self.rect_y >= SCREEN_HEIGHT:
             self.is_alive = False
         if self.rect.colliderect(player.rect):

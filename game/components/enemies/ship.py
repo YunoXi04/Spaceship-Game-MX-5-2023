@@ -8,11 +8,14 @@ class Ship(Enemy):
     SPEED_Y =  10
     SPEED_X = 5
     INTERVAL = 10
+    SHOOTING_TIME = 1000
 
     
     def __init__(self, Speed):
         self.image = pygame.transform.scale(ENEMY_1, (self.WIDTH, self.HEIGHT))
         self.cont = 0
+        self.shooting_time = 0
+        
         super().__init__(self.image, Speed)
 
     def move(self):   
@@ -30,7 +33,8 @@ class Ship(Enemy):
         self.cont += 1
 
     def shoot(self, bullet_handler):
-        bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
+        if self.shooting_time % self.SHOOTING_TIME == 0:
+            bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
         
     
     def update(self, bullet_handler):

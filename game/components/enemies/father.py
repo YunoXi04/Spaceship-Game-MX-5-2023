@@ -8,7 +8,8 @@ class Father(Enemy):
     WIDTH = 40
     HEIGHT = 50
     POS_X = [-WIDTH, SCREEN_WIDTH + WIDTH]
-    SHOOTING_INTERVAL = 10
+    SHOOTING_INTERVAL = 1000
+    SHOOTING_TIME = 1000
 
     def __init__(self):
         self.image = pygame.transform.scale(ENEMY_4,(self.WIDTH, self.HEIGHT))
@@ -45,6 +46,7 @@ class Father(Enemy):
                 self.rect.x -= self.speed_x
    
     def shoot(self, bullet_handler):
-        bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
+        if self.shooting_time % self.SHOOTING_TIME == 0:
+            bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
 
                 

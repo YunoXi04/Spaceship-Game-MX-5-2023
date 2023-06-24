@@ -9,7 +9,7 @@ class Enemy:
     SPEED_Y = 10
     SPEED_X = 10
     INTERVAL = 80
-    SHOOTING_TIME = 10
+    SHOOTING_TIME = 1000
 
 
     def __init__(self, image, Speed):

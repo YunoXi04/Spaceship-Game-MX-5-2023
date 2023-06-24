@@ -7,10 +7,11 @@ class Ship2(Enemy):
     HEIGHT = 60
     SPEED_Y = 6
     SPEED_X = 10
-    SHOOTING_INTERVAL = 120
+    SHOOTING_INTERVAL = 1000
 
     def __init__(self, Speed):
         self.image = pygame.transform.scale(ENEMY_2, (self.WIDTH, self.HEIGHT))
+        self.shooting_time = 0
         super().__init__(self.image, Speed)
 
     def move(self):
@@ -25,7 +26,8 @@ class Ship2(Enemy):
                 self.mov_x = LEFT
 
     def shoot(self, bullet_handler):
-        bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
+        if self.shooting_time % self.SHOOTING_TIME == 0:
+            bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
 
     def update(self, bullet_handler):
         self.move()
