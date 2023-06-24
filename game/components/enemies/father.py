@@ -44,9 +44,6 @@ class Father(Enemy):
                 self.rect.x += self.speed_x
             elif player_pos.x < self.rect.x:
                 self.rect.x -= self.speed_x
-   
-    def shoot(self, bullet_handler):
-        if self.shooting_time % self.SHOOTING_TIME == 0:
-            bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
+
 
                 

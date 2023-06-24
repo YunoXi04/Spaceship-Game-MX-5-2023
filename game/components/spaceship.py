@@ -32,7 +32,7 @@ class Spaceship:
             self.shoot(bullet_handler)    
 
         if self.has_shield:
-            time_to_show = (self.time_up - pygame.time.get_ticks())//1000
+            time_to_show = ((self.time_up - pygame.time.get_ticks())//1000, 2)
             if time_to_show < 0:
                 self.desactivate_power_up()   
 
@@ -57,14 +57,7 @@ class Spaceship:
     def move_down(self):
         if self.rect.bottom < SCREEN_HEIGHT:
             self.rect.y += 10  
-
-    def get_damage(self, damage):
-        self.life -= damage
-        if self.life <= 0:
-            self.is_alive = False  
-
-    def receive_damage(self, amount):
-        self.life -= amount                    
+               
    
     def activate_power_up(self, power_up):
         self.time_up = power_up.time_up
@@ -83,7 +76,7 @@ class Spaceship:
         self.rect.x = self.X_POS
         self.rect.y = self.Y_POS
         self.is_alive = True
-        self.life = 50
+        self.life = 1
              
 
 

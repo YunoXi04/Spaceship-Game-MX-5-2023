@@ -26,7 +26,5 @@ class Son(Enemy):
    def move(self):
         self.rect.y += self.speed_y + self.Speed
 
-   def shoot(self, bullet_handler):
-        if self.shooting_time % self.SHOOTING_TIME == 0:
-          bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.centerS)  
+ 
           

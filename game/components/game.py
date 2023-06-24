@@ -30,7 +30,7 @@ class Game:
         self.number_death = 0
         self.score = 0
         self.score_list = []
-        self.life = 50
+        self.life = 1
         self.music()
 
     def run(self):

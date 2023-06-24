@@ -28,6 +28,7 @@ class PowerUp:
             self.is_alive = False
             self.is_used = True
             self.time_up = pygame.time.get_ticks() + self.DURATION
+            
 
 
     def draw(self, screen):

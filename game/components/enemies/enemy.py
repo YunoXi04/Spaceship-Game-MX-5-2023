@@ -6,10 +6,10 @@ class Enemy:
     y_pos_inicial = -60
     MOV_X = [RIGHT, LEFT]
     Speed = 20
-    SPEED_Y = 10
-    SPEED_X = 10
+    SPEED_Y = 5
+    SPEED_X = 2
     INTERVAL = 80
-    SHOOTING_TIME = 1000
+    SHOOTING_TIME = 30
 
 
     def __init__(self, image, Speed):
@@ -38,9 +38,6 @@ class Enemy:
     def shoot(self, bullet_handler):
         if self.shooting_time % self.SHOOTING_TIME == 0:
             bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
-
-    def get_damage(self):
-        self.is_alive = False
-        self.is_destroyed = True              
+            
 
 

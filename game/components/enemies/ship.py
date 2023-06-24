@@ -32,9 +32,7 @@ class Ship(Enemy):
             self.cont = 0
         self.cont += 1
 
-    def shoot(self, bullet_handler):
-        if self.shooting_time % self.SHOOTING_TIME == 0:
-            bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
+  
         
     
     def update(self, bullet_handler):

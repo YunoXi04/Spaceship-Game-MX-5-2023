@@ -45,7 +45,7 @@ class EnemyHandler:
     def check_colisions(self, enemy, player):
         if enemy.rect.colliderect(player.rect):
             enemy.is_alive = False
-            player.receive_damage(10)
+        
 
     def reset(self):  
         self.enemies = [] 
