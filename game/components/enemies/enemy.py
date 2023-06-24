@@ -8,8 +8,8 @@ class Enemy:
     Speed = 20
     SPEED_Y = 10
     SPEED_X = 10
-    INTERVAL = 100
-    SHOOTING_TIME = 30
+    INTERVAL = 80
+    SHOOTING_TIME = 10
 
 
     def __init__(self, image, Speed):
@@ -35,9 +35,6 @@ class Enemy:
     def draw(self, screen):
         screen.blit(self.image, self.rect)
     
-    def move(self):
-        pass    
-
     def shoot(self, bullet_handler):
         if self.shooting_time % self.SHOOTING_TIME == 0:
             bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)

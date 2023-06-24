@@ -1,6 +1,6 @@
 import pygame 
 
-from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, WHITE_COLOR
+from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, WHITE_COLOR, INTRO
 from game.components.spaceship import Spaceship
 from game.components.enemies.enemy_handler import EnemyHandler
 from game.components.bullets.bullet_handler import BulletHandler
@@ -28,8 +28,10 @@ class Game:
         self.power_up_handler = PowerUpHandler()
         self.new_life = NewLife()
         self.number_death = 0
-        self.score = [0]
+        self.score = 0
+        self.score_list = []
         self.life = 50
+        self.music()
 
     def run(self):
         # Game loop: events - update - draw
@@ -56,11 +58,12 @@ class Game:
             user_input = pygame.key.get_pressed()
             self.player.update(user_input, self.bullet_handler)
             self.enemy_handler.update(self.player, self.bullet_handler)
-            self.bullet_handler.update(self.player, self.enemy_handler.enemies)
+            self.bullet_handler.update(self.player, self.enemy_handler.enemies, self)
             self.power_up_handler.update(self.player)
             self.new_life.update(self.player)
-            self.score[self.number_death] = self.enemy_handler.number_enemies_destroyed * 10
+            self.score = self.enemy_handler.number_enemies_destroyed * 10
             if not self.player.is_alive:
+                self.score_list.append(self.score)
                 self.draw()
                 pygame.time.delay(300)
                 self.playing = False
@@ -71,8 +74,6 @@ class Game:
         self.draw_background()
         if  self.playing:
             self.clock.tick(FPS)
-            self.draw_background()
-            self.screen.fill((255, 255, 255))
             self.enemy_handler.draw(self.screen)
             self.player.draw(self.screen)
             self.bullet_handler.draw(self.screen)
@@ -88,6 +89,7 @@ class Game:
 
     def draw_background(self):
         image = pygame.transform.scale(BG, (SCREEN_WIDTH, SCREEN_HEIGHT))
+        print("xx")
         image_height = image.get_height()
         self.screen.blit(image, (self.x_pos_bg, self.y_pos_bg))
         self.screen.blit(image, (self.x_pos_bg, self.y_pos_bg - image_height))
@@ -101,10 +103,11 @@ class Game:
             text, text_rect = text_utils.get_message("Press ENTER to Start", 30, WHITE_COLOR)
             self.screen.blit(text, text_rect) 
         else:
-            best, best_score = text_utils.get_message(f"Best Score: {max(self.score)}", 30, WHITE_COLOR, height=SCREEN_HEIGHT//2 - 50)
+            best, best_score = text_utils.get_message(f"Best Score: {max(self.score_list)}", 30, WHITE_COLOR, height=SCREEN_HEIGHT//2 - 50)
             text, text_rect = text_utils.get_message("Press ENTER to Restart", 30, WHITE_COLOR)
             score, score_rect = text_utils.get_message(f"Your Score is: {str(self.score)}", 30, WHITE_COLOR, height=SCREEN_HEIGHT // 2 + 50)
-            tries, tries_rect = text_utils.get_message(f"Deads: {self.number_death}", 20, WHITE_COLOR, height=SCREEN_HEIGHT // 2 + 50)
+            tries, tries_rect = text_utils.get_message(f"Deads Player: {self.number_death}", 20, WHITE_COLOR)
+            tries_rect.topright = (SCREEN_WIDTH - 10, 10)
             self.screen.blit(best, best_score)
             self.screen.blit(text, text_rect) 
             self.screen.blit(score, score_rect)
@@ -115,14 +118,15 @@ class Game:
         self.screen.blit(score, score_rect)        
 
     def reset(self):
-        self.player.reset()
         self.enemy_handler.reset()
         self.bullet_handler.reset()
         self.power_up_handler.reset()
         self.new_life.reset()
+        self.player.reset()
 
     def music(self):
-        pygame.mixer.music.load("sound/sounds_intro.mp3")
+        pygame.mixer.init() 
+        pygame.mixer.music.load(INTRO)
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.10)
 

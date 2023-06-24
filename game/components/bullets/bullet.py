@@ -1,10 +1,11 @@
 from game.utils.constants import SCREEN_HEIGHT
 
 class Bullet:
-    def __init__(self, image,ship):
+    def __init__(self, image, type, center):
         self.image = image
         self.rect = self.image.get_rect()
-        self.rect.center = ship.rect.center
+        self.type = type
+        self.rect.center = center
         self.is_alive = True
 
     def update(self, object):

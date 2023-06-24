@@ -13,12 +13,11 @@ class EnemyHandler:
     def update(self, player, bullet_handler):
         self.add_enemy()
         for enemy in self.enemies:
-            self.check_colisions(enemy, player)
-            enemy.update(player, bullet_handler)
+            enemy.update(bullet_handler)
             if enemy.is_destroyed:
                 self.number_enemies_destroyed += 1
             if not enemy.is_alive:
-                self.remove_enemy(enemy)
+                self.remove_enemy(enemy)   
 
     def draw(self, screen):
         for enemy in self.enemies:

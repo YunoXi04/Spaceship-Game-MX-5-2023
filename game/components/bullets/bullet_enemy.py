@@ -7,11 +7,11 @@ class BulletEnemy(Bullet):
     SCREEN_HEIGHT = 32
     SPEED = 10
 
-    def __init__(self, ship, center):
+    def __init__(self, center):
         self.image = BULLET_ENEMY
-        self.image = pygame.transform.scale(self.image, (self.WIDTH, self.HEIGTH))
+        self.image = pygame.transform.scale(self.image, (self.WIDTH, self.SCREEN_HEIGHT))
         self.type = BULLET_ENEMY_TYPE
-        super().__init__(self.image, self.type, center, ship)
+        super().__init__(self.image, self.type, center)
 
     def draw(self, screen):
         for bullet in self.bullets:

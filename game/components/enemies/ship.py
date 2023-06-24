@@ -5,9 +5,10 @@ from game.utils.constants import ENEMY_1, RIGHT, LEFT, SCREEN_WIDTH, BULLET_ENEM
 class Ship(Enemy):
     WIDTH = 40
     HEIGHT = 60
-    SPEED_Y = 15
-    SPEED_X = 12
-    INTERVAL = 100
+    SPEED_Y =  10
+    SPEED_X = 5
+    INTERVAL = 10
+
     
     def __init__(self, Speed):
         self.image = pygame.transform.scale(ENEMY_1, (self.WIDTH, self.HEIGHT))
@@ -30,13 +31,15 @@ class Ship(Enemy):
 
     def shoot(self, bullet_handler):
         bullet_handler.add_bullet(BULLET_ENEMY_TYPE, self.rect.center)
+        
     
-    def update(self, bullet_handler, player_pos):
-        self.move(player_pos)
+    def update(self, bullet_handler):
+        self.move()
         if self.rect.y >= SCREEN_HEIGHT:
             self.is_alive = False
         self.shoot(bullet_handler)
-        super().update()
-
+        
+    
+        
                      
 

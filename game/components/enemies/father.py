@@ -5,10 +5,10 @@ from game.utils.constants import ENEMY_4, SCREEN_WIDTH, SCREEN_HEIGHT, BULLET_EN
 
 
 class Father(Enemy):
-    WIDTH = 50
+    WIDTH = 40
     HEIGHT = 50
     POS_X = [-WIDTH, SCREEN_WIDTH + WIDTH]
-    SHOOTING_INTERVAL = 30
+    SHOOTING_INTERVAL = 10
 
     def __init__(self):
         self.image = pygame.transform.scale(ENEMY_4,(self.WIDTH, self.HEIGHT))
